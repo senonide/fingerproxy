@@ -7,7 +7,7 @@ import (
 
 	"github.com/prometheus/client_golang/prometheus"
 	"github.com/prometheus/client_golang/prometheus/promauto"
-	"github.com/wi1dcard/fingerproxy/pkg/metadata"
+	"github.com/senonide/fingerproxy/pkg/metadata"
 )
 
 const defaultMetricsPrefix = "fingerproxy"

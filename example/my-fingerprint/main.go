@@ -5,24 +5,24 @@ import (
 	"strconv"
 	"strings"
 
-	"github.com/wi1dcard/fingerproxy"
-	"github.com/wi1dcard/fingerproxy/pkg/fingerprint"
-	"github.com/wi1dcard/fingerproxy/pkg/metadata"
-	"github.com/wi1dcard/fingerproxy/pkg/reverseproxy"
+	"github.com/senonide/fingerproxy/internal/cli"
+	"github.com/senonide/fingerproxy/pkg/fingerprint"
+	"github.com/senonide/fingerproxy/pkg/metadata"
+	"github.com/senonide/fingerproxy/pkg/reverseproxy"
 
 	utls "github.com/refraction-networking/utls"
 )
 
 func main() {
-	fingerproxy.GetHeaderInjectors = func() []reverseproxy.HeaderInjector {
-		i := fingerproxy.DefaultHeaderInjectors()
+	cli.GetHeaderInjectors = func() []reverseproxy.HeaderInjector {
+		i := cli.DefaultHeaderInjectors()
 		i = append(i, fingerprint.NewFingerprintHeaderInjector(
 			"X-My-Fingerprint",
 			SimpleFingerprint,
 		))
 		return i
 	}
-	fingerproxy.Run()
+	cli.Run()
 }
 
 func SimpleFingerprint(data *metadata.Metadata) (string, error) {

@@ -7,7 +7,7 @@ This is an example of using Fingerproxy as a library. It utilizes the packages p
 
 ## Usage
 
-1. Download echo-server binary from GitHub releases: <https://github.com/wi1dcard/fingerproxy/releases/latest>
+1. Download echo-server binary from GitHub releases: <https://github.com/senonide/fingerproxy/releases/latest>
 2. Prepare certificates or generate self-signed certificates.
 3. Run echo-server: `./echo-server`.
 4. Optional: use `-verbose` or `-quiet` to get more or less logs.

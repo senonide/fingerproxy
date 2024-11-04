@@ -21,14 +21,27 @@ build_%:
 	export GOOS=$(GOOS) GOARCH=$(GOARCH)
 
 	go build -o $(BINPATH) \
-		-ldflags "-X main.buildCommit=$(COMMIT) -X main.buildVersion=$(TAG)" \
-		./cmd
+		-ldflags "-X main.buildCommit=$(COMMIT) -X main.buildVersion=$(TAG)" .
 
 	chmod +x $(BINPATH)
 
-PKG_LIST = $(shell go list ./... | grep -v github.com/wi1dcard/fingerproxy/pkg/http2)
+PKG_LIST = $(shell go list ./... | grep -v github.com/senonide/fingerproxy/pkg/http2)
 test:
 	@go test -v $(PKG_LIST)
 
 benchmark:
 	@go test -v $(PKG_LIST) -run=NONE -bench=^Benchmark -benchmem -count=3 -cpu=2
+
+prepare:
+	openssl req -x509 -newkey ec -pkeyopt ec_paramgen_curve:secp384r1 -days 3650 \
+      -nodes -keyout tls.key -out tls.crt -subj "/CN=localhost" \
+      -addext "subjectAltName=DNS:localhost,DNS:*.localhost,IP:127.0.0.1"
+
+run-test:
+	go run . -listen-addr :8443 -forward-url https://httpbin.io
+
+run-example:
+	go run example/echo-server/main.go -listen-addr :8443
+
+run:
+	go run . -listen-addr :8443

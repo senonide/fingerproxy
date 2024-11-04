@@ -8,23 +8,23 @@ import (
 	"strings"
 
 	"github.com/dreadl0ck/tlsx"
-	"github.com/wi1dcard/fingerproxy"
-	"github.com/wi1dcard/fingerproxy/pkg/fingerprint"
-	"github.com/wi1dcard/fingerproxy/pkg/ja3"
-	"github.com/wi1dcard/fingerproxy/pkg/metadata"
-	"github.com/wi1dcard/fingerproxy/pkg/reverseproxy"
+	"github.com/senonide/fingerproxy/internal/cli"
+	"github.com/senonide/fingerproxy/pkg/fingerprint"
+	"github.com/senonide/fingerproxy/pkg/ja3"
+	"github.com/senonide/fingerproxy/pkg/metadata"
+	"github.com/senonide/fingerproxy/pkg/reverseproxy"
 )
 
 func main() {
-	fingerproxy.GetHeaderInjectors = func() []reverseproxy.HeaderInjector {
-		i := fingerproxy.DefaultHeaderInjectors()
+	cli.GetHeaderInjectors = func() []reverseproxy.HeaderInjector {
+		i := cli.DefaultHeaderInjectors()
 		i = append(i, fingerprint.NewFingerprintHeaderInjector(
 			"X-Sorted-JA3-Fingerprint",
 			fpSortedJA3,
 		))
 		return i
 	}
-	fingerproxy.Run()
+	cli.Run()
 }
 
 func fpSortedJA3(data *metadata.Metadata) (string, error) {

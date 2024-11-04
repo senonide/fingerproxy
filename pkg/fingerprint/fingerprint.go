@@ -11,9 +11,9 @@ import (
 	"log"
 
 	"github.com/dreadl0ck/tlsx"
-	"github.com/wi1dcard/fingerproxy/pkg/ja3"
-	"github.com/wi1dcard/fingerproxy/pkg/ja4"
-	"github.com/wi1dcard/fingerproxy/pkg/metadata"
+	"github.com/senonide/fingerproxy/pkg/ja3"
+	"github.com/senonide/fingerproxy/pkg/ja4"
+	"github.com/senonide/fingerproxy/pkg/metadata"
 )
 
 var (

@@ -1,4 +1,4 @@
-package fingerproxy
+package cli
 
 import (
 	"flag"
@@ -125,7 +125,7 @@ func parseFlags() {
 	flag.Parse()
 
 	if *flagVersion {
-		fmt.Fprintln(os.Stderr, "Fingerproxy - https://github.com/wi1dcard/fingerproxy")
+		fmt.Fprintln(os.Stderr, "Fingerproxy - https://github.com/senonide/fingerproxy")
 		fmt.Fprintf(os.Stderr, "Version: %s (%s)\n", BuildTag, BuildCommit)
 		os.Exit(0)
 	}

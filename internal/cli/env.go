@@ -1,4 +1,4 @@
-package fingerproxy
+package cli
 
 import (
 	"os"
